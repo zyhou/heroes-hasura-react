@@ -1,21 +1,21 @@
 {
-  "name": "hasura-hello",
+  "name": "heroes-hasura-react",
   "version": "1.0.0",
-  "description": "Hasura POC",
+  "description": "Tour of Heroes app written with React and Hasura",
   "main": "index.js",
   "scripts": {
     "dev:migrate": "knex migrate:latest"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zyhou/hasura-hello.git"
+    "url": "git+https://github.com/zyhou/heroes-hasura-react.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zyhou/hasura-hello/issues"
+    "url": "https://github.com/zyhou/heroes-hasura-react/issues"
   },
-  "homepage": "https://github.com/zyhou/hasura-hello#readme",
+  "homepage": "https://github.com/zyhou/heroes-hasura-react#readme",
   "dependencies": {
     "knex": "^0.15.2"
   }
