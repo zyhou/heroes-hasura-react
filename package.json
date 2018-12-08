@@ -4,8 +4,7 @@
   "description": "Tour of Heroes app written with React and Hasura",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "dev:migrate": "knex migrate:latest"
+    "start": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +17,8 @@
   },
   "homepage": "https://github.com/zyhou/heroes-hasura-react#readme",
   "dependencies": {
-    "knex": "^0.15.2"
+    "knex": "^0.15.2",
+    "pg": "^7.7.1"
   },
   "devDependencies": {
     "nodemon": "^1.18.7"

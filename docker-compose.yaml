@@ -1,12 +1,19 @@
 version: '3.6'
 services:
   postgres:
-    image: postgres
+    image: postgres:10
     ports:
     - "5432:5432"
-    restart: always
+    expose:
+    - "5432"
     volumes:
-    - db_data:/var/lib/postgresql/data
+      - "/etc/passwd:/etc/passwd:ro"
+      - "postgres_data:/var/lib/postgresql/data/"
+      - ".:/app"
+    environment:
+      - POSTGRES_HOST=postgres
+      - POSTGRES_PASSWORD=heroes
+      - POSTGRES_USER=heroes
 
   graphql-engine:
     image: hasura/graphql-engine:v1.0.0-alpha31
@@ -14,24 +21,26 @@ services:
     - "8080:8080"
     depends_on:
     - "postgres"
-    restart: always
     environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:@postgres:5432/postgres
+      HASURA_GRAPHQL_DATABASE_URL: postgres://heroes:heroes@postgres:5432/postgres
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       ## uncomment next line to set an access key
       # HASURA_GRAPHQL_ACCESS_KEY: mysecretaccesskey
 
   heroes-react:
-    build: docker/node
+    image: node:10
     ports:
       - '3000:3000'
     depends_on:
       - 'postgres'
       - 'graphql-engine'
     environment:
-      PG_CONNECTION_STRING: postgres://postgres:@postgres:5432/postgres
+      PG_CONNECTION_STRING: postgres://heroes:heroes@postgres:5432/postgres
     volumes:
       - .:/app
+    working_dir: /app
+    user: "${UID}:${GID}"
+    command: "yarn start"
 
 volumes:
-  db_data:
+  postgres_data:
