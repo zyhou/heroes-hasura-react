@@ -9,6 +9,7 @@ help:
 install: ## setup all project dependencies
 	docker-compose build
 	docker-compose run --rm --no-deps heroes-react bash -ci "cd /app && yarn"
+	docker-compose run --rm --no-deps heroes-react bash -ci "cd /app/front && yarn"
 
 start: ## start all docker containers
 	docker-compose up -d
