@@ -2,9 +2,12 @@ version: '3.6'
 services:
   postgres:
     image: postgres
+    ports:
+    - "5432:5432"
     restart: always
     volumes:
     - db_data:/var/lib/postgresql/data
+
   graphql-engine:
     image: hasura/graphql-engine:v1.0.0-alpha31
     ports:
@@ -17,5 +20,18 @@ services:
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
       ## uncomment next line to set an access key
       # HASURA_GRAPHQL_ACCESS_KEY: mysecretaccesskey
+
+  hasura-hello:
+    image: node:10-alpine
+    ports:
+      - '3000:3000'
+    depends_on:
+      - 'postgres'
+      - 'graphql-engine'
+    environment:
+      PG_CONNECTION_STRING: postgres://postgres:@postgres:5432/postgres
+    volumes:
+      - .:/app/
+
 volumes:
   db_data:

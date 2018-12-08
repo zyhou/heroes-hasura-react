@@ -1,0 +1,22 @@
+{
+  "name": "hasura-hello",
+  "version": "1.0.0",
+  "description": "Hasura POC",
+  "main": "index.js",
+  "scripts": {
+    "dev:migrate": "knex migrate:latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zyhou/hasura-hello.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zyhou/hasura-hello/issues"
+  },
+  "homepage": "https://github.com/zyhou/hasura-hello#readme",
+  "dependencies": {
+    "knex": "^0.15.2"
+  }
+}
