@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
+import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
@@ -12,9 +13,11 @@ const client = new ApolloClient({
 });
 
 const ConnectedApp = () => (
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>
+  <Router>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </Router>
 );
 
 ReactDOM.render(<ConnectedApp />, document.getElementById("root"));
