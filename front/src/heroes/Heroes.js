@@ -5,7 +5,7 @@ import { Query } from "react-apollo";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 
-import SimpleCard from "./SimpleCard";
+import HeroCard from "./HeroCard";
 
 const GET_HEROES = gql`
   {
@@ -26,14 +26,7 @@ const Heroes = () => (
         if (loading) return "Loading...";
         if (error) return `Error! ${error.message}`;
 
-        return data.heroes.map(heroe => (
-          <SimpleCard
-            key={heroe.id}
-            id={heroe.id}
-            title={heroe.name}
-            subtitle={heroe.description}
-          />
-        ));
+        return data.heroes.map(heroe => <HeroCard key={heroe.id} {...heroe} />);
       }}
     </Query>
   </React.Fragment>

@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Switch, Redirect, Route, Link } from "react-router-dom";
+import { Link, Redirect, Router } from "@reach/router";
 
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -12,8 +12,9 @@ import MenuList from "@material-ui/core/MenuList";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-import Heroes from "./components/Heroes";
-import Villains from "./components/Villains";
+import Heroes from "./heroes/Heroes";
+import HeroDetail from "./heroes/HeroDetail";
+import Villains from "./vilains/Villains";
 
 const styles = theme => ({
   root: {
@@ -60,11 +61,12 @@ const App = ({ classes }) => (
         </MenuList>
       </Grid>
       <Grid item xs={8} className={classes.navBar}>
-        <Switch>
-          <Redirect from="/" exact to="/heroes" />
-          <Route path="/heroes" component={Heroes} />
-          <Route path="/villains" component={Villains} />
-        </Switch>
+        <Router>
+          <Redirect noThrow from="/" to="/heroes" />
+          <Heroes path="/heroes" />
+          <HeroDetail path="/heroes/:id" />
+          <Villains path="/villains" />
+        </Router>
       </Grid>
     </Grid>
   </div>

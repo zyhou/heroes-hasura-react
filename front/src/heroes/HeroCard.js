@@ -1,5 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
+
+import { Link } from "@reach/router";
+
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -17,24 +20,27 @@ const styles = {
   }
 };
 
-const SimpleCard = ({ classes, id, title, subtitle }) => (
+const HeroCard = ({ classes, id, name, description }) => (
   <Card className={classes.card}>
     <CardContent>
-      <Typography className={classes.title}>{title}</Typography>
-      <Typography color="textSecondary">{subtitle}</Typography>
+      <Typography className={classes.title}>{name}</Typography>
+      <Typography color="textSecondary">{description}</Typography>
     </CardContent>
     <CardActions>
       <Button size="small">Delete</Button>
-      <Button size="small">Edit</Button>
+      <Button size="small">
+        <Link to={`/heroes/${id}`}>Edit</Link>
+      </Button>
     </CardActions>
   </Card>
 );
 
-SimpleCard.propTypes = {
+HeroCard.propTypes = {
   classes: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  children: PropTypes.object
 };
 
-export default withStyles(styles)(SimpleCard);
+export default withStyles(styles)(HeroCard);
