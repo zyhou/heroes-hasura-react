@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 
 import { Link } from "@reach/router";
 
-import gql from "graphql-tag";
 import { Mutation } from "react-apollo";
-import { GET_HEROES } from "./Heroes";
+import { DELETE_HEROES, refreshCache } from "./queries";
 
 import { withStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
@@ -13,29 +12,6 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-
-const DELETE_HEROES = gql`
-  mutation Delete_heroes($id: uuid!) {
-    delete_heroes(where: { id: { _eq: $id } }) {
-      returning {
-        id
-      }
-    }
-  }
-`;
-
-const updateCache = (cache, { data: { delete_heroes } }) => {
-  const { heroes } = cache.readQuery({ query: GET_HEROES });
-  const deleteHero = delete_heroes.returning[0];
-  if (deleteHero) {
-    cache.writeQuery({
-      query: GET_HEROES,
-      data: {
-        heroes: heroes.filter(hero => hero.id !== deleteHero.id)
-      }
-    });
-  }
-};
 
 const styles = {
   card: {
@@ -54,7 +30,11 @@ const HeroCard = ({ classes, id, name, description }) => (
       <Typography color="textSecondary">{description}</Typography>
     </CardContent>
     <CardActions>
-      <Mutation key={id} mutation={DELETE_HEROES} update={updateCache}>
+      <Mutation
+        key={id}
+        mutation={DELETE_HEROES}
+        update={refreshCache("delete")}
+      >
         {delete_heroes => (
           <Button
             size="small"

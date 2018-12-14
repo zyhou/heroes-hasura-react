@@ -13,7 +13,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
 import Heroes from "./heroes/Heroes";
-import HeroDetail from "./heroes/HeroDetail";
+import HeroUpdate from "./heroes/HeroUpdate";
+import HeroNew from "./heroes/HeroNew";
 import Villains from "./vilains/Villains";
 
 const styles = theme => ({
@@ -64,7 +65,8 @@ const App = ({ classes }) => (
         <Router>
           <Redirect noThrow from="/" to="/heroes" />
           <Heroes path="/heroes" />
-          <HeroDetail path="/heroes/:id" />
+          <HeroNew path="/heroes/new" />
+          <HeroUpdate path="/heroes/:id" />
           <Villains path="/villains" />
         </Router>
       </Grid>

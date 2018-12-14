@@ -22,41 +22,67 @@ const styles = theme => ({
   }
 });
 
-const HeroForm = ({ classes, name, description }) => (
-  <Card>
-    <CardHeader
-      classes={{ root: classes.header, title: classes.title }}
-      title={name || "New Hero"}
-    />
-    <CardContent>
-      <form>
-        <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="name">Name</InputLabel>
-          <Input id="name" name="name" defaultValue={name} />
-        </FormControl>
-        <FormControl margin="normal" required fullWidth>
-          <InputLabel htmlFor="description">Description</InputLabel>
-          <Input
-            name="description"
-            id="description"
-            defaultValue={description}
-          />
-        </FormControl>
-      </form>
-    </CardContent>
-    <CardActions>
-      <Button size="small">
-        <Link to="/heroes">Cancel</Link>
-      </Button>
-      <Button size="small">Save</Button>
-    </CardActions>
-  </Card>
-);
+class HeroForm extends React.Component {
+  constructor(props) {
+    super(props);
+    const { name, description } = this.props;
+    this.state = { name, description };
+  }
+
+  onChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  render() {
+    const { classes, name, description, onSave } = this.props;
+    return (
+      <Card>
+        <CardHeader
+          classes={{ root: classes.header, title: classes.title }}
+          title={name || "New Hero"}
+        />
+        <CardContent>
+          <form>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="name">Name</InputLabel>
+              <Input
+                id="name"
+                name="name"
+                defaultValue={name}
+                onChange={this.onChange}
+              />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="description">Description</InputLabel>
+              <Input
+                name="description"
+                id="description"
+                defaultValue={description}
+                onChange={this.onChange}
+              />
+            </FormControl>
+          </form>
+        </CardContent>
+        <CardActions>
+          <Button size="small">
+            <Link to="/heroes">Cancel</Link>
+          </Button>
+          <Button size="small" onClick={() => onSave({ ...this.state })}>
+            Save
+          </Button>
+        </CardActions>
+      </Card>
+    );
+  }
+}
 
 HeroForm.propTypes = {
   classes: PropTypes.object.isRequired,
   name: PropTypes.string,
-  description: PropTypes.string
+  description: PropTypes.string,
+  onSave: PropTypes.func
 };
 
 export default withStyles(styles)(HeroForm);

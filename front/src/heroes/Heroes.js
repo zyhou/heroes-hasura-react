@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 import { Link } from "@reach/router";
 
-import gql from "graphql-tag";
 import { Query } from "react-apollo";
+import { GET_HEROES } from "./queries";
 
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
@@ -12,16 +12,6 @@ import Divider from "@material-ui/core/Divider";
 import Icon from "@material-ui/core/Icon";
 
 import HeroCard from "./HeroCard";
-
-export const GET_HEROES = gql`
-  {
-    heroes {
-      id
-      name
-      description
-    }
-  }
-`;
 
 const styles = theme => ({
   header: {
