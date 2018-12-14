@@ -7,7 +7,7 @@ import Divider from "@material-ui/core/Divider";
 
 import HeroCard from "./HeroCard";
 
-const GET_HEROES = gql`
+export const GET_HEROES = gql`
   {
     heroes {
       id
