@@ -60,7 +60,7 @@ const App = ({ classes }) => (
           </MenuItem>
         </MenuList>
       </Grid>
-      <Grid item xs={8} className={classes.navBar}>
+      <Grid item xs={8}>
         <Router>
           <Redirect noThrow from="/" to="/heroes" />
           <Heroes path="/heroes" />
