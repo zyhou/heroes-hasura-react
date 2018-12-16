@@ -7,6 +7,7 @@ const Villains = () => (
   <React.Fragment>
     <Typography variant="h6">Villains</Typography>
     <Divider />
+    <p>Let's try to build someting here !</p>
   </React.Fragment>
 );
 

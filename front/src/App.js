@@ -16,6 +16,7 @@ import Heroes from "./heroes/Heroes";
 import HeroUpdate from "./heroes/HeroUpdate";
 import HeroNew from "./heroes/HeroNew";
 import Villains from "./vilains/Villains";
+import NotFound from "./components/NotFound";
 
 const styles = theme => ({
   root: {
@@ -28,11 +29,21 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 3
   },
   menuItem: {
-    "&:focus": {
-      backgroundColor: theme.palette.primary.main
-    }
+    width: "100%",
+    height: "100%",
+    padding: "10px"
+  },
+  active: {
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.secondary.main
   }
 });
+
+const isActive = classes => ({ isCurrent }) => {
+  return isCurrent
+    ? { className: `${classes.active} ${classes.menuItem}` }
+    : null;
+};
 
 const App = ({ classes }) => (
   <div classes={classes.root}>
@@ -50,14 +61,32 @@ const App = ({ classes }) => (
           Menu
         </Typography>
         <MenuList>
-          <MenuItem className={classes.menuItem}>
-            <Link to="/heroes/">Heroes</Link>
+          <MenuItem>
+            <Link
+              to="/heroes/"
+              getProps={isActive(classes)}
+              className={classes.menuItem}
+            >
+              Heroes
+            </Link>
           </MenuItem>
-          <MenuItem className={classes.menuItem}>
-            <Link to="/villains/">Villains</Link>
+          <MenuItem>
+            <Link
+              to="/villains/"
+              getProps={isActive(classes)}
+              className={classes.menuItem}
+            >
+              Villains
+            </Link>
           </MenuItem>
-          <MenuItem className={classes.menuItem}>
-            <Link to="/about/">About</Link>
+          <MenuItem>
+            <Link
+              to="/about/"
+              getProps={isActive(classes)}
+              className={classes.menuItem}
+            >
+              About
+            </Link>
           </MenuItem>
         </MenuList>
       </Grid>
@@ -68,6 +97,7 @@ const App = ({ classes }) => (
           <HeroNew path="/heroes/new" />
           <HeroUpdate path="/heroes/:id" />
           <Villains path="/villains" />
+          <NotFound default />
         </Router>
       </Grid>
     </Grid>
