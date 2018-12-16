@@ -3,7 +3,10 @@
 Tour of Heroes app written with React and Hasura
 
 ```
+make install
 make start
+make migration
 ```
 
-Open [http://localhost:8080/console](http://localhost:8080/console)
+Hasura admin console [http://localhost:8080/console](http://localhost:8080/console)   
+Front-end web site [http://localhost:3000](http://localhost:3000)   
