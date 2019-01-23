@@ -31,20 +31,27 @@ psql: ## connect to database
 graphql: ## connect to hasura graphql
 	docker-compose exec graphql-engine sh
 
+##################
+## Hasura cli Commands
+##################
+
+HASURA_CLI = docker-compose exec graphql-engine sh -ci "\
+	cd heroes-migrations/migrations && /bin/hasura-cli
+
 migration-init: ## init directory migrations
 	docker-compose exec graphql-engine sh -ci "cd heroes-migrations && /bin/hasura-cli init --directory migrations"
 
 migration-apply: ## apply migration
-	docker-compose exec graphql-engine sh -ci "cd heroes-migrations/migrations && /bin/hasura-cli migrate apply"
+	$(HASURA_CLI) migrate apply"
 
 migration-new: ## make migration-new MIGRATION_TITLE=whatever-title
-	docker-compose exec graphql-engine sh -ci "cd heroes-migrations/migrations && /bin/hasura-cli migrate create ${MIGRATION_TITLE}"
+	$(HASURA_CLI) migrate create ${MIGRATION_TITLE}"
 
 migration-down: ## make migration-down NB_MIGRATIONS=whatever-number
-	docker-compose exec graphql-engine sh -ci "cd heroes-migrations/migrations && /bin/hasura-cli migrate apply --down ${NB_MIGRATIONS}"
+	$(HASURA_CLI) migrate apply --down ${NB_MIGRATIONS}"
 
 metadata-export: ## export metadata graphql (before: need to track tables with hasura console)
-	docker-compose exec graphql-engine sh -ci "cd heroes-migrations/migrations && /bin/hasura-cli metadata export"
+	$(HASURA_CLI) metadata export"
 
 metadata-apply: ## apply metadata graphql
-	docker-compose exec graphql-engine sh -ci "cd heroes-migrations/migrations && /bin/hasura-cli metadata apply"
+	$(HASURA_CLI) metadata apply"
