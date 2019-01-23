@@ -4,8 +4,6 @@ services:
     image: postgres:10
     ports:
     - '5432:5432'
-    expose:
-    - '5432'
     volumes:
       - "/etc/passwd:/etc/passwd:ro"
       - "postgres_data:/var/lib/postgresql/data/"
@@ -16,17 +14,17 @@ services:
       - POSTGRES_USER=heroes
 
   graphql-engine:
-    image: hasura/graphql-engine:v1.0.0-alpha33.cli-migrations
+    image: hasura/graphql-engine:v1.0.0-alpha35.cli-migrations
     ports:
     - '8080:8080'
     depends_on:
     - 'postgres'
     volumes:
-      - ./services/hasura/migrations:/hasura-migrations
+    - .:/heroes-migrations
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://heroes:heroes@postgres:5432/postgres
+      HASURA_GRAPHQL_MIGRATIONS_DIR: /heroes-migrations
       HASURA_GRAPHQL_ENABLE_CONSOLE: "true" # set to "false" to disable console
-      HASURA_GRAPHQL_MIGRATIONS_DIR: /hasura-migrations
       ## uncomment next line to set an access key
       # HASURA_GRAPHQL_ACCESS_KEY: mysecretaccesskey
 
@@ -35,10 +33,7 @@ services:
     ports:
       - '3000:3000'
     depends_on:
-      - 'postgres'
       - 'graphql-engine'
-    environment:
-      PG_CONNECTION_STRING: postgres://heroes:heroes@postgres:5432/postgres
     volumes:
       - .:/app
     working_dir: /app
