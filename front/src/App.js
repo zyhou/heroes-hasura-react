@@ -39,8 +39,8 @@ const styles = theme => ({
   }
 });
 
-const isActive = classes => ({ isCurrent }) => {
-  return isCurrent
+const isActive = classes => ({ isPartiallyCurrent }) => {
+  return isPartiallyCurrent
     ? { className: `${classes.active} ${classes.menuItem}` }
     : null;
 };
@@ -63,7 +63,7 @@ const App = ({ classes }) => (
         <MenuList>
           <MenuItem>
             <Link
-              to="/heroes/"
+              to="/heroes"
               getProps={isActive(classes)}
               className={classes.menuItem}
             >
@@ -72,7 +72,7 @@ const App = ({ classes }) => (
           </MenuItem>
           <MenuItem>
             <Link
-              to="/villains/"
+              to="/villains"
               getProps={isActive(classes)}
               className={classes.menuItem}
             >
@@ -81,7 +81,7 @@ const App = ({ classes }) => (
           </MenuItem>
           <MenuItem>
             <Link
-              to="/about/"
+              to="/about"
               getProps={isActive(classes)}
               className={classes.menuItem}
             >
