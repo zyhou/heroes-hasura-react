@@ -31,7 +31,8 @@ const styles = theme => ({
   menuItem: {
     width: "100%",
     height: "100%",
-    padding: "10px"
+    padding: "10px",
+    textDecoration: "none"
   },
   active: {
     backgroundColor: theme.palette.primary.main,
@@ -61,7 +62,7 @@ const App = ({ classes }) => (
           Menu
         </Typography>
         <MenuList>
-          <MenuItem>
+          <MenuItem disableGutters={true}>
             <Link
               to="/heroes"
               getProps={isActive(classes)}
@@ -70,7 +71,7 @@ const App = ({ classes }) => (
               Heroes
             </Link>
           </MenuItem>
-          <MenuItem>
+          <MenuItem disableGutters={true}>
             <Link
               to="/villains"
               getProps={isActive(classes)}
@@ -79,7 +80,7 @@ const App = ({ classes }) => (
               Villains
             </Link>
           </MenuItem>
-          <MenuItem>
+          <MenuItem disableGutters={true}>
             <Link
               to="/about"
               getProps={isActive(classes)}

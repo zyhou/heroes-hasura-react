@@ -13,15 +13,21 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-const styles = {
+const styles = theme => ({
   card: {
     minWidth: 275,
     marginBottom: 10
   },
   title: {
     fontSize: 14
+  },
+  button: {
+    color: theme.palette.primary.main
+  },
+  link: {
+    textDecoration: "none"
   }
-};
+});
 
 const HeroCard = ({ classes, id, name, description }) => (
   <Card className={classes.card}>
@@ -38,14 +44,17 @@ const HeroCard = ({ classes, id, name, description }) => (
         {delete_heroes => (
           <Button
             size="small"
+            className={classes.button}
             onClick={() => delete_heroes({ variables: { id } })}
           >
             Delete
           </Button>
         )}
       </Mutation>
-      <Button size="small">
-        <Link to={`/heroes/${id}`}>Edit</Link>
+      <Button size="small" className={classes.button}>
+        <Link className={classes.link} to={`/heroes/${id}`}>
+          Edit
+        </Link>
       </Button>
     </CardActions>
   </Card>

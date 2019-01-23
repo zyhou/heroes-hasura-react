@@ -19,6 +19,12 @@ const styles = theme => ({
   },
   title: {
     color: theme.palette.secondary.main
+  },
+  button: {
+    color: theme.palette.primary.main
+  },
+  link: {
+    textDecoration: "none"
   }
 });
 
@@ -66,10 +72,16 @@ class HeroForm extends React.Component {
           </form>
         </CardContent>
         <CardActions>
-          <Button size="small">
-            <Link to="/heroes">Cancel</Link>
+          <Button size="small" className={classes.button}>
+            <Link className={classes.link} to="/heroes">
+              Cancel
+            </Link>
           </Button>
-          <Button size="small" onClick={() => onSave({ ...this.state })}>
+          <Button
+            size="small"
+            className={classes.button}
+            onClick={() => onSave({ ...this.state })}
+          >
             Save
           </Button>
         </CardActions>
