@@ -5,7 +5,8 @@ Tour of Heroes app written with React and Hasura
 ```
 make install
 make start
-make migration
+make migration-apply
+make metadata-apply
 ```
 
 Hasura admin console [http://localhost:8080/console](http://localhost:8080/console)   
