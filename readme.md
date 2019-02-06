@@ -1,6 +1,6 @@
 ## Tour of Heroes
 
-Tour of Heroes app written with React and Hasura
+Tour of Heroes app written with React and [Hasura](https://hasura.io/)
 
 ```
 make install
