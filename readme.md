@@ -2,6 +2,9 @@
 
 Tour of Heroes app written with React and [Hasura](https://hasura.io/)
 
+![Tour of heroes](https://raw.githubusercontent.com/zyhou/heroes-hasura-react/master/doc/tourofheroes.gif)
+
+
 ```
 make install
 make start
